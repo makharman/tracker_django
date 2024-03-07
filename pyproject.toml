@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "tracker-django"
+version = "0.1.0"
+description = ""
+authors = ["makh.arman <a.makhanbet17@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
