@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Expense, Income
+from tracker.models import Expense, Income
 
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
