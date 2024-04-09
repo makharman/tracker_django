@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
+    CURRENSY_CHOICES = (
+        ("TENGE", "₸"),
+        ("DOLLAR", "$"),
+        ("RUBL", "₽"),
+    )
+
+    currency = models.CharField(max_length=6,
+        choices=CURRENSY_CHOICES,
+        default="TENGE")
+
+    
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -26,3 +37,5 @@ class UserProfile(models.Model):
 
     def __str__(self) -> str:
         return f'{self.id} - {self.mobile_phone}' 
+    
+    

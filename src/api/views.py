@@ -1,7 +1,7 @@
 from rest_framework.generics import CreateAPIView,ListAPIView, RetrieveUpdateAPIView
 from tracker.models import Expense, Income
 from .serializers import ExpenseSerializer, IncomeSerializer
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 
 class ExpenseListModelSerializer(ListAPIView):
     queryset = Expense.objects.all()
