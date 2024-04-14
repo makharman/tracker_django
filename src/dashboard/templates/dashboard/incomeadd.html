@@ -9,60 +9,48 @@ Add New Income
 {% endblock title %}
 
 {% block content %}
-{% if edit %}
-  <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
-  <h2></h2>
-  <form class="form" method="post" action="{% url 'dashboard:incomeedit' ele.pk%}">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label class="form-label" >Amount</label>
-        <input class="form-control" type="text" name="amount" value="{{ele.amount}}"/>
-    </div>  
-    <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select class="form-select form-select-md" name='category'>
-           {% for i in category %}
-            <option value="{{i.name}}">{{i.name}}</option>
-           {% endfor %}
-        </select>
-    </div>  
-    <div class="mb-3">
-        <label class="form-label" >Date {{ele.date}}</label>
-        <input placeholder="Date" name="date" class="form-control" type="text" onfocus="(this.type='date')" value="{{ele.date|date:'Y-m-d'}}" id="date">
-    </div>  
-    <div class="mb-3">
-        <label class="form-label" >Description</label>
-        <input class="form-control" type="text" name="description" value="{{ele.description}}" />
-    </div>  
-      <input type="submit" class="btn btn-primary" />
-  </form>
-  {% else %}
-
-  <h2></h2>
-  <form class="form" method="post" action="{% url 'dashboard:incomeadd' %}">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label class="form-label" >Amount</label>
-        <input class="form-control" type="text" name="amount"/>
-    </div>  
-    <div class="mb-3">
-        <label class="form-label">Category</label>
-        <select class="form-select form-select-md" name='category'>
-           {% for i in category %}
-            <option value="{{i.name}}">{{i.name}}</option>
-           {% endfor %}
-        </select>
-    </div>  
-    <div class="mb-3">
-        <label class="form-label" >Date</label>
-        <input placeholder="Date" name="date" class="form-control" type="text" onfocus="(this.type='date')" id="date">
-    </div>  
-    <div class="mb-3">
-        <label class="form-label" >Description</label>
-        <input class="form-control" type="text" name="description"/>
-    </div>  
-      <input type="submit" class="btn btn-primary" />
-  </form>
-  {% endif %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        {% if edit %}
+        <form class="form" method="post" action="{% url 'dashboard:incomeedit' object.pk%}">
+        {% else %}
+        <form class="form" method="post" action="">
+        {% endif %}
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input class="form-control" type="text" name="amount" value="{{ form.amount.value }}">
+          </div>  
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select form-select-md" name="category">
+              <option value="" selected disabled>Choose category</option>
+              {% for category in categories %}
+              <option value="{{ category.name }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>  
+          <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input class="form-control" type="date" name="date" value="{{ form.date.value }}">
+          </div>  
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input class="form-control" type="text" name="description" value="{{ form.description.value }}">
+          </div>  
+          <input type="submit" class="btn btn-primary" value="{% if edit %}Update{% else %}Add{% endif %}">
+        </form>
+      </div>
+    </div>
+  </div>
   {% endblock content %}
+  
+
+
+
+
+
+
+
 

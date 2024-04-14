@@ -12,8 +12,6 @@ class IncomeListModelSerializer(ListAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly] 
-    
-    
 
 
 class ExpenseAddModelSerializer(CreateAPIView):

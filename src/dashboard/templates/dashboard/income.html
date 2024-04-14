@@ -20,10 +20,10 @@
         </tr>
       </thead>
       <tbody>
-        {% for i in page_obj %}
+        {% for i in page_obj_2 %}
         <tr>
           <td scope="row">{{ forloop.counter }}</td>
-          <td>{{i.amount}}</td>
+          <td>{{i.earned_amount}}</td>
           <td>{{i.description}}</td>
           <td>{{i.category}}</td>
           <td>{{i.date}}</td>
@@ -38,18 +38,18 @@
 
   <div class="pagination-container">
     <div class="page-item">
-      Showing page {{page_obj.number}} of {{ page_obj.paginator.num_pages }}
+      Showing page {{page_obj_2.number}} of {{ page_obj_2.paginator.num_pages }}
     </div>
 
     <ul class="pagination justify-content-end">
-      {% if page_obj.has_previous %}
-      <li {% if page_obj.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
-      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% if page_obj_2.has_previous %}
+      <li {% if page_obj_2.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj_2.previous_page_number }}">Previous</a></li>
       {% endif %}
 
-      {% if page_obj.has_next %}
-      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-      <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+      {% if page_obj_2.has_next %}
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj_2.next_page_number }}">Next</a></li>
+      <li class="page-item"> <a class="page-link" href="?page={{ page_obj_2.paginator.num_pages }}">{{ page_obj_2.paginator.num_pages}} &raquo;</a></li>
       {% endif %}
 
       </ul>

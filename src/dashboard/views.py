@@ -8,6 +8,7 @@ from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from tracker.models import Expense, Income,ExpenseCategory,IncomeCategory
+from .forms import ExpenseForm, IncomeForm
 
 def home(request):
     return render(request, 'dashboard/dashboard.html')
@@ -16,16 +17,15 @@ class ExpensesListView(ListView):
     model = Expense
     template_name = 'dashboard/expenses.html'
     context_object_name = 'page_obj'
-    paginate_by = 5
+    paginate_by = 8
 
     def get_queryset(self):
         return Expense.objects.filter(user=self.request.user)
 
 
-
 class ExpensesCreateView(LoginRequiredMixin, CreateView):
     model = Expense
-    fields = ['spent_amount', 'category', 'date', 'description']
+    form_class = ExpenseForm
     template_name = 'dashboard/expensesadd.html'
     success_url = reverse_lazy('dashboard:expenses')
 
@@ -41,11 +41,12 @@ class ExpensesCreateView(LoginRequiredMixin, CreateView):
 
 class ExpensesUpdateView(LoginRequiredMixin, UpdateView):
     model = Expense
-    fields = ['spent_amount', 'category', 'date', 'description']
+    form_class = ExpenseForm
     template_name = 'dashboard/expensesadd.html'
     success_url = reverse_lazy('dashboard:expenses')
 
     def form_valid(self, form):
+        form.instance.owner = self.request.user
         messages.success(self.request, "Edited Successfully")
         return super().form_valid(form)
 
@@ -67,7 +68,7 @@ class ExpensesDeleteView(LoginRequiredMixin, DeleteView):
 class IncomeListView(ListView):
     model = Income
     template_name = 'dashboard/income.html'
-    context_object_name = 'page_obj'
+    context_object_name = 'page_obj_2'
     paginate_by = 5
 
     def get_queryset(self):
@@ -77,7 +78,7 @@ class IncomeListView(ListView):
 
 class IncomeCreateView(LoginRequiredMixin, CreateView):
     model = Income
-    fields = ['earned_amount', 'category', 'date', 'description']
+    form_class = IncomeForm
     template_name = 'dashboard/incomeadd.html'
     success_url = reverse_lazy('dashboard:income')
     
@@ -93,14 +94,14 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-
 class IncomeUpdateView(LoginRequiredMixin, UpdateView):
     model = Income
-    fields = ['spent_amount', 'category', 'date', 'description']
+    form_class = IncomeForm
     template_name = 'dashboard/incomeadd.html'
     success_url = reverse_lazy('dashboard:income')
 
     def form_valid(self, form):
+        form.instance.owner = self.request.user
         messages.success(self.request, "Edited Successfully")
         return super().form_valid(form)
 
