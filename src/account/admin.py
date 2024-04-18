@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import UserProfile
+from account.models import User
 
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'first_name', 'last_name', 'date_of_birth', 'mobile_phone', 'gender', 'is_active','created_at', 'updated_at')
+@admin.register(User)
+class UserAccountAdmin(admin.ModelAdmin):
+    list_display = ('email', 'password', 'first_name', 'last_name', 'date_of_birth', 'mobile_phone', 'gender', 'is_active', 'created_at', 'updated_at')
+    
+    
     readonly_fields = (
         'created_at',
         'updated_at',
+        'password',
     )
+

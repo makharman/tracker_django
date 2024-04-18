@@ -3,46 +3,46 @@ from tracker.models import Expense, Income
 from .serializers import ExpenseSerializer, IncomeSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 
-class ExpenseListModelSerializer(ListAPIView):
+class ExpenseListModel(ListAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes = [IsAuthenticatedOrReadOnly] 
 
-class IncomeListModelSerializer(ListAPIView):
+class IncomeListModel(ListAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly] 
 
 
-class ExpenseAddModelSerializer(CreateAPIView):
+class ExpenseAddModel(CreateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes = [IsAuthenticated] 
     
 
-class IncomeAddModelSerializer(CreateAPIView):
+class IncomeAddModel(CreateAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [IsAuthenticated] 
     
     
-class ExpenseEditModelSerializer(RetrieveUpdateAPIView):
+class ExpenseEditModel(RetrieveUpdateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes = [IsAuthenticated] 
 
-class IncomeEditModelSerializer(RetrieveUpdateAPIView):
+class IncomeEditModel(RetrieveUpdateAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [IsAuthenticated] 
     
-class ExpenseDeleteModelSerializer(RetrieveUpdateAPIView):
+class ExpenseDeleteModel(RetrieveUpdateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
     permission_classes = [IsAdminUser] 
     
 
-class IncomeDeleteModelSerializer(RetrieveUpdateAPIView):
+class IncomeDeleteModel(RetrieveUpdateAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     permission_classes = [IsAdminUser] 
