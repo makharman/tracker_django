@@ -1,7 +1,28 @@
 from rest_framework.generics import CreateAPIView,ListAPIView, RetrieveUpdateAPIView
+from rest_framework import generics
 from tracker.models import Expense, Income
-from .serializers import ExpenseSerializer, IncomeSerializer
+from .serializers import ExpenseSerializer, IncomeSerializer,RegisterSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+
+
+class RegisterApi(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+    def post(self, request, *args,  **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        user_data = UserSerializer(
+            user, context=self.get_serializer_context()
+        )
+        
+        user = user_data.data
+        return Response(
+            {
+            "user": user,
+            "message": "User Created Successfully.  Now perform Login to get your token",
+            }
+        )
 
 class ExpenseListModel(ListAPIView):
     queryset = Expense.objects.all()

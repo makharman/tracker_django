@@ -7,11 +7,13 @@ from .views import (
     ExpenseEditModel,
     IncomeEditModel,
     ExpenseDeleteModel,
-    IncomeDeleteModel
+    IncomeDeleteModel,
+    RegisterApi
 )
 
 urlpatterns = [
     
+    path('register/', RegisterApi.as_view(), name="register"),
     
     path('expenses/', ExpenseListModel.as_view(), name='expense-list'),
     path('incomes/', IncomeListModel.as_view(), name='income-list'),
