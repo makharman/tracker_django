@@ -7,7 +7,7 @@ class ExpenseCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ('spent_amount', 'description', 'category', 'date', 'user')
+    list_display = ('id','spent_amount', 'description', 'category', 'date', 'user')
     
 
 @admin.register(IncomeCategory)
@@ -16,5 +16,5 @@ class IncomeCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Income)
 class IncomeAdmin(admin.ModelAdmin):
-    list_display = ('earned_amount', 'description', 'category', 'date', 'user')
+    list_display = ('id','earned_amount', 'description', 'category', 'date', 'user')
 

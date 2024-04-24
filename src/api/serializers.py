@@ -5,6 +5,7 @@ from account.models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = User
         fields = ('email', 'password', 'first_name', 'last_name')
@@ -23,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('first_name', 'last_name')
 
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:

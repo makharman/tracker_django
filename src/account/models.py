@@ -2,6 +2,7 @@ from django.db import models
 # from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from .managers import UserManager
+from geoposition.fields import GeopositionField
 
 class User(AbstractUser):
     CURRENSY_CHOICES = (
@@ -40,6 +41,11 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     
+    position = GeopositionField(
+    null=True,
+    default="43.23269713756249,76.91163003444672",
+    )
+    
     class Meta:
         db_table='UserAccount'
         ordering = ['-created_at']
@@ -48,5 +54,4 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return f'{self.id} - {self.email}' 
-    
     
