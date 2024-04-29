@@ -9,13 +9,17 @@ from .views import (
     ExpenseDeleteModel,
     IncomeDeleteModel,
     AccountApi,
-    AccountDetailApi
+    AccountDetailApi,
+    ExchangeRateAPIView,
+    UserListAPIView,
 )
+
 
 urlpatterns = [
     
     path('account/', AccountApi.as_view(), name="account"),
     path('account/<int:pk>/', AccountDetailApi.as_view(), name="account_detail"),
+    path('account/list/', UserListAPIView.as_view(), name="account_list"),
     
     
     path('expenses/', ExpenseListModel.as_view(), name='expense-list'),
@@ -28,4 +32,7 @@ urlpatterns = [
     path('incomes/<int:pk>/edit/', IncomeEditModel.as_view(), name='income-detail-update'),
     path('expenses/<int:pk>/delete/', ExpenseDeleteModel.as_view(), name='expense-delete'),
     path('incomes/<int:pk>/delete/', IncomeDeleteModel.as_view(), name='income-delete'),
+    
+    path('exchangerate/', ExchangeRateAPIView.as_view(), name='exchange'),
+    
 ]

@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('dashboard.urls')),
     path('account/', include('account.urls')),
     path('api/v1/', include('api.urls')),
+    
  
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
